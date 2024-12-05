@@ -3,6 +3,10 @@ import numpy as np
 
 input = np.loadtxt("Day 1/input.txt", dtype='int64')
 
+# One-Liners P1 and P2:
+print("P1: ", np.sum(abs(np.sort(input, axis=0)[:, 0] - np.sort(input, axis=0)[:, 1])))
+print("P2: ", sum([l * list(input[:, 1]).count(l) for l in input[:, 0]]))
+
 # Part 1
 sorted = np.sort(input, axis=0)
 diffs = abs(sorted[:, 0] - sorted[:, 1])
