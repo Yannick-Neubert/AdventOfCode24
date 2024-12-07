@@ -4,6 +4,10 @@ import numpy as np
 with open("Day 2/input.txt", 'r') as file:
     input = [np.fromstring(line, sep=" ", dtype='int64') for line in file]
 
+# One-Liners P1 and P2:
+print("P1: ", len([x for x in [[y-x for x, y in zip(line, line[1:])] for line in input] if min(x) >=1 and max(x) <= 3 or max(x) <= -1 and min(x) >= -3]))
+print("P2: ", len([line for line in input if any(map(lambda x: min(x) >=1 and max(x) <= 3 or max(x) <= -1 and min(x) >= -3, map(lambda removed: [y-x for x, y in zip(removed, removed[1:])], [np.delete(line, i) for i in range(len(line))])))]))
+
 # Part 1
 # generate differences by pairing each row with itself shifted by one 
 diffs = [[y-x for x, y in zip(line, line[1:])] for line in input]
