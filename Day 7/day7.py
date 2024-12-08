@@ -12,7 +12,35 @@ def parse(row):
 
 input = [parse(row) for row in input]
 
-# Part 1 and 2:
+#-------------------------------------------------------------------------------------------------#
+# Part 1 - check Part 2 for comments
+def try_opsP1(res, nums):
+    # shorthand for (num a X num b) X num c where X is one of + *
+    a, b, c = nums[0], nums[1], nums[-1]
+
+    # base case
+    if len(nums) == 2:
+        if a * b == res or a + b == res:
+            return res
+        return 0
+    
+    elif res % c == 0:
+        if c * try_opsP1(int(res/c), nums[:-1]) == res or c + try_opsP1(res-c, nums[:-1]) == res:
+            return res
+    else:
+        if c + try_opsP1(res-c, nums[:-1]) == res:
+            return res
+    return 0
+
+sum = 0
+for equation in input:
+    if try_opsP1(equation[0], equation[1:]) == equation[0]:
+        sum += equation[0]
+        
+print("Solution part 1: ", sum)
+#-------------------------------------------------------------------------------------------------#
+
+# Part 2:
 # recursively try operators from right to left
 # while checking divisibility (reverse mult) and seperatability (reverse concat) as shortcuts
 # res acts as reverse accumulator, getting reduced each step

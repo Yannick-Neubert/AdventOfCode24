@@ -22,6 +22,28 @@ def out_of_bounds(pos):
         return True
     return False
 
+#-------------------------------------------------------------------------------------------------#
+# Part 1
+for pair in pairs:
+    dy = pair[1][0] - pair[0][0]
+    dx = pair[1][1] - pair[0][1]
+
+    if dy % 3 == 0 and dx % 3 == 0:
+        pass # never happens but valid in theory
+    
+    # check bounds
+    p1 = (pair[1][0] + dy, pair[1][1] + dx)
+    if not out_of_bounds(p1): 
+        input[p1] = '#'
+
+    p2 = (pair[0][0] - dy, pair[0][1] - dx)
+    if not out_of_bounds(p2): 
+        input[p2] = '#'
+
+print("Solution part 1: ", len(np.where(input == '#')[0]))
+#-------------------------------------------------------------------------------------------------#
+
+# Part 2
 # place antinodes
 for pair in pairs:
     dy = pair[1][0] - pair[0][0]
@@ -30,7 +52,7 @@ for pair in pairs:
     if dy % 3 == 0 and dx % 3 == 0:
         pass # never happens but valid in theory
     
-    # for part 1: fix m = 1
+    # walk in both directions until out of bounds
     m = 0
     while True: 
         p1 = (pair[1][0] + m*dy, pair[1][1] + m*dx)
@@ -47,5 +69,4 @@ for pair in pairs:
         input[p2] = '#'
         m += 1
 
-print(input)
-print(len(np.where(input == '#')[0]))
+print("Solution part 2: ", len(np.where(input == '#')[0]))
