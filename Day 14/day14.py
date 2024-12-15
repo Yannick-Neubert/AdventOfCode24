@@ -43,7 +43,7 @@ np.add.at(map, (new_positions[:, 0], new_positions[:, 1]), 1)
 print("Solution part 1: ", safety_factor(map))
 
 # Part 2
-# easier to use than arrays
+# easier to use than arrays for this method
 def map_to_str(map):
     return '\n'.join(''.join('#' if x != 0 else '.' for x in row) for row in map)
 
@@ -53,7 +53,7 @@ positions = timestep(positions, velocities, start)
 
 # this is incredibly stupid but it works
 # simulate until the tree pattern is found
-# other fun approaches include:
+# other fun min/max/outlier approaches include:
 # minimizing entropy or variance or file size with compression
 # flood fills, connected components, robot pairs
 # fourier transform, orientation, safety factor
@@ -64,5 +64,6 @@ while True:
     map = np.zeros([HEIGTH, WIDTH])
     np.add.at(map, (positions[:, 0], positions[:, 1]), 1)
     if tree in map_to_str(map):
-        print("Solution part 2: ", start)
         break
+
+print("Solution part 2: ", start)
