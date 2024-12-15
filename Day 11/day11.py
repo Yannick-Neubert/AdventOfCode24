@@ -1,3 +1,4 @@
+#Task: https://adventofcode.com/2024/day/11
 from functools import cache
 
 with open("Day 11/input.txt") as file:

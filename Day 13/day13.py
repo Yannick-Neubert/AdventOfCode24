@@ -1,11 +1,11 @@
+#Task: https://adventofcode.com/2024/day/13
 import numpy as np
 import re
-import math
 
 with open("Day 13/input.txt") as file:
     input = file.readlines()
     
-input = [input[i:i+3] for i in range(0, len(input), 4)] 
+machines = [input[i:i+3] for i in range(0, len(input), 4)] 
 pattern = r"X[+=](\d+), Y[+=](\d+)"
 
 # Part 1 and 2
@@ -16,7 +16,7 @@ pattern = r"X[+=](\d+), Y[+=](\d+)"
 # where ax, ay, bx, by, x, y = map(int, re.findall(r'(\d+)', machine))
 def optimal_tokens(SHIFT=0):
     tokens = 0
-    for slot in input:
+    for slot in machines:
         buttonA = [int(num) for num in re.search(pattern, slot[0].strip()).groups()]
         buttonB = [int(num) for num in re.search(pattern, slot[1].strip()).groups()]
         prize = [int(num) + SHIFT for num in re.search(pattern, slot[2].strip()).groups()]
